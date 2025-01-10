@@ -47,7 +47,7 @@ class CourseController extends Controller
             'price' => 'required|integer',
             'image' => 'nullable|image',
             'max_students' => 'required|integer',
-            'teacher_id' => 'required|exists:users,id',
+            'teacher_id' => 'nullable|exists:users,id',
         ]);
 
         $course = new Course($validated);
@@ -70,9 +70,9 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($course_id);
 
-        if ($course->teacher_id !== $request->user()->id) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+            // if ($course->teacher_id !== $request->user()->id) {
+            //     return response()->json(['error' => 'Unauthorized'], 401);
+            // }
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -81,6 +81,7 @@ class CourseController extends Controller
             'price' => 'required|integer',
             'image' => 'nullable|image',
             'max_students' => 'required|integer',
+            'teacher_id' => 'nullable|exists:users,id',
         ]);
 
         $course->fill($validated);
@@ -93,7 +94,7 @@ class CourseController extends Controller
 
         return response()->json([
             'code' => 201,
-            'message' => 'Laporan Berhasil Diupdate',
+            'message' => 'Course Berhasil Diupdate',
             'data' => $course,
         ], 201);
     }
@@ -113,15 +114,15 @@ class CourseController extends Controller
         $course = Course::findOrFail($course_id);
 
         $existingEnrollment = CourseMember::where('course_id', $course_id)
-        ->where('user_id', Auth::id())
-        ->first();
+            ->where('user_id', Auth::id())
+            ->first();
 
-     if ($existingEnrollment) {
-         return response()->json([
-             'code' => 400,
-             'message' => 'You are already enrolled in this course.',
-         ], 400);
-     }
+        if ($existingEnrollment) {
+            return response()->json([
+                'code' => 400,
+                'message' => 'You are already enrolled in this course.',
+            ], 400);
+        }
         if ($course->isFull()) {
             return response()->json([
                 'code' => 400,
