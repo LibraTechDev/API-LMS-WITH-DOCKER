@@ -98,8 +98,24 @@ docker exec laravel_app php artisan migrate --seed
 Migrasi database untuk memperbarui struktur tabel di dalam container `laravel_app`
 
 ### How To Testing On Postman
-- Pertama Bisa Meregister terlebih dahulu dengan mengakses localhost/api/register dengan mengisikan field Username,Fullname,Email,Password untuk mendapatkan authToken, atau bisa juga dengan melakukan login yaitu mengakses localhost/api/login untuk sama-sama mendapatkan authToken. AuthToken di sini berguna sebagai authorization untuk mengakses berbagai API Route yang berada dalam group function auth:sanctum karena diasumsikan untuk bisa mengakses fitur-fiturnya memerlukan login terlebih dahulu. Kecuali 3 route yaitu login,register,logout.
-- Setiap ingin mengakses endpoint , cantumkan terlebih dahulu AuthToken tersebut sebagai header Authorization sebagai keynya , lalu untuk valuenya diisi Bearer | {authToken}
+- Pertama Bisa Meregister terlebih dahulu dengan mengakses localhost/api/register dengan mengisikan field **Username,Fullname,Email,Password** untuk mendapatkan authToken, atau bisa juga dengan melakukan login yaitu mengakses localhost/api/login untuk sama-sama mendapatkan authToken. **AuthToken di sini berguna sebagai authorization** untuk mengakses berbagai API Route yang berada dalam group function auth:sanctum karena diasumsikan untuk bisa mengakses fitur-fiturnya memerlukan login terlebih dahulu. **Kecuali 3 route yaitu login,register,logout**.
+- Setiap ingin mengakses endpoint , cantumkan terlebih dahulu **AuthToken tersebut sebagai header Authorization sebagai keynya , lalu untuk valuenya diisi Bearer | {authToken}**
+- Saya menyediakan dua akun untuk testing yaitu dengan role teacher dan student, bisa langsung login ke akun tersebut
+```shell
+'username' => 'Primavieri',
+'fullname' => 'Primavieri Rhesa',
+'email' => 'primavieri@gmail.com',
+'password' => '12345678',
+'role' => 'teacher' //untuk role teacher
+```
+
+```shell
+'username' => 'Aggus',
+'fullname' => 'Agus',
+'email' => 'agus@gmail.com',
+'password' => '12345678',
+'role' => 'student' //untuk role student
+```
 
 
 ## Arsitektur Aplikasi
