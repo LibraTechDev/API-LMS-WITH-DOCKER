@@ -46,6 +46,7 @@ class CourseController extends Controller
             'description' => 'required|string',
             'price' => 'required|integer',
             'image' => 'nullable|image',
+            'max_students' => 'required|integer',
             'teacher_id' => 'required|exists:users,id',
         ]);
 
@@ -79,6 +80,7 @@ class CourseController extends Controller
             'description' => 'required|string',
             'price' => 'required|integer',
             'image' => 'nullable|image',
+            'max_students' => 'required|integer',
         ]);
 
         $course->fill($validated);
