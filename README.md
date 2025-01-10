@@ -85,7 +85,7 @@ DB_PASSWORD=
 Menjadi
 ```.env
 DB_CONNECTION=mysql
-DB_HOST=db
+DB_HOST=mysql_db
 DB_PORT=3306
 DB_DATABASE=lms_api
 DB_USERNAME=root
@@ -93,9 +93,14 @@ DB_PASSWORD=root
 ```
 ##### 3.2.9. Database
 ```shell
-docker exec laravel_app php artisan migrate
+docker exec laravel_app php artisan migrate --seed
 ```
 Migrasi database untuk memperbarui struktur tabel di dalam container `laravel_app`
+
+### How To Testing On Postman
+- Pertama Bisa Meregister terlebih dahulu dengan mengakses localhost/api/register dengan mengisikan field Username,Fullname,Email,Password untuk mendapatkan authToken, atau bisa juga dengan melakukan login yaitu mengakses localhost/api/login untuk sama-sama mendapatkan authToken. AuthToken di sini berguna sebagai authorization untuk mengakses berbagai API Route yang berada dalam group function auth:sanctum karena diasumsikan untuk bisa mengakses fitur-fiturnya memerlukan login terlebih dahulu. Kecuali 3 route yaitu login,register,logout.
+- Setiap ingin mengakses endpoint , cantumkan terlebih dahulu AuthToken tersebut sebagai header Authorization sebagai keynya , lalu untuk valuenya diisi Bearer | {authToken}
+
 
 ## Arsitektur Aplikasi
 - **docker-compose.yml** - Konfigurasi yang digunakan oleh Docker Compose untuk mendefinisikan dan menjalankan multi-container Docker aplikasi, termasuk pengaturan layanan, jaringan, volume, dan penghubung antar container
