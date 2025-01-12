@@ -70,7 +70,7 @@ class FeedbackController extends Controller
     {
         $feedback = Feedback::findOrFail($feedbackId);
 
-        if ($feedback->student_id != Auth::id()) {
+        if ($feedback->student_id != Auth::id() && Auth::user()->role != 'teacher') {
             return response()->json([
                 'code' => 403,
                 'message' => 'Unauthorized',
