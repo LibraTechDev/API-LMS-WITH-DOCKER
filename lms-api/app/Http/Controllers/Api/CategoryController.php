@@ -24,7 +24,6 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'teacher_id' => 'required|exists:users,id',
         ]);
 
         $category = new Category([
