@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/courses/{course_id}/contents', [CourseContentController::class, 'index']);
     Route::get('/courses/{course_id}/contents/{content_id}', [CourseContentController::class, 'show']);
 
+    Route::get('/courses/{course_id}/contents/{content_id}/comments', [CourseCommentController::class, 'getCommentsByCourse']);
     Route::get('/contents/{content_id}/comments', [CourseCommentController::class, 'index']);
     Route::post('/contents/{content_id}/comments', [CourseCommentController::class, 'store']);
     Route::delete('/comments/{comment_id}', [CourseCommentController::class, 'destroy']);
